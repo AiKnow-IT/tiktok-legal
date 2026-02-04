@@ -4,58 +4,86 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AIKnow-IT — Kids-Safe Shorts Publisher</title>
+  <meta name="description" content="Generate and publish kid-safe short videos. TikTok integration via OAuth and Content Posting API."/>
   <style>
-    body{font-family:system-ui,Arial;margin:0;line-height:1.5;background:#0b0f17;color:#eef2ff}
-    header,section,footer{max-width:900px;margin:0 auto;padding:28px 18px}
-    .card{background:#111a2e;border:1px solid #243155;border-radius:14px;padding:18px;margin:14px 0}
+    body{font-family:system-ui,Arial;margin:0;line-height:1.6;background:#0b0f17;color:#eef2ff}
+    header,section,footer{max-width:980px;margin:0 auto;padding:28px 18px}
+    .card{background:#111a2e;border:1px solid #243155;border-radius:16px;padding:18px;margin:14px 0}
     a{color:#8bd0ff}
     .btn{display:inline-block;background:#2d6cdf;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none}
     .muted{color:#b7c2ff}
-    ul{padding-left:18px}
+    h1,h2{margin:0 0 10px}
+    ul,ol{margin:8px 0 0 18px}
+    footer{padding-top:10px;padding-bottom:40px}
+    .grid{display:grid;gap:14px}
+    @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
   </style>
 </head>
 <body>
-  <header>
-    <h1>AIKnow-IT</h1>
-    <p class="muted">Generate and publish kids-safe short videos across platforms — including TikTok via OAuth + Direct Post.</p>
+
+<header>
+  <h1>AIKnow-IT</h1>
+  <p class="muted">
+    A web-based tool that generates and publishes kid-safe short videos for creators and educational publishers.
+  </p>
+  <p>
     <a class="btn" href="#how">How it works</a>
-  </header>
+    &nbsp; <a class="btn" style="background:#273455" href="#support">Support</a>
+  </p>
+</header>
 
-  <section class="card">
-    <h2>What we do</h2>
-    <p>AIKnow-IT helps creators and educational publishers generate short, kid-friendly animated videos and publish them to social platforms. Users connect their own accounts and control what gets posted.</p>
-  </section>
+<section class="card">
+  <h2>What we do</h2>
+  <p>
+    AIKnow-IT helps users create short, kid-friendly animated videos (age 8–12) and publish them to social platforms.
+    Users connect their own accounts and control what gets posted.
+  </p>
+</section>
 
-  <section id="how" class="card">
+<section class="grid">
+  <div class="card" id="how">
     <h2>How it works</h2>
     <ol>
-      <li>Generate a kid-safe script and storyboard (age 8–12).</li>
-      <li>Create a short video (20–25 seconds, 9:16).</li>
+      <li>Generate a kid-safe script and storyboard.</li>
+      <li>Create a vertical short video (9:16, ~20–25 seconds).</li>
       <li>Prepare captions and hashtags.</li>
-      <li>Connect TikTok via OAuth (user consent).</li>
-      <li>Publish via TikTok Content Posting API and track status.</li>
+      <li>User connects TikTok via OAuth consent.</li>
+      <li>Publish and track status automatically.</li>
     </ol>
-  </section>
+  </div>
 
-  <section class="card">
-    <h2>Kids-safety</h2>
+  <div class="card">
+    <h2>TikTok integration</h2>
     <ul>
-      <li>No adult content, violence, hate, or harassment.</li>
-      <li>Positive themes: friendship, learning, humor, curiosity.</li>
-      <li>Content is generated using strict guidelines before publishing.</li>
+      <li><b>Login (OAuth):</b> Users authorize access to their TikTok account.</li>
+      <li><b>Scope:</b> We request <code>video.publish</code> only for posting videos.</li>
+      <li><b>Content Posting API:</b> We publish via Direct Post and fetch status until complete.</li>
+      <li><b>Privacy:</b> We query creator settings and use allowed privacy options.</li>
     </ul>
-  </section>
+  </div>
+</section>
 
-  <section class="card">
-    <h2>Support</h2>
-    <p>Questions or support requests: <a href="mailto:business.ai.gpt@gmail.com">business.ai.gpt@gmail.com</a></p>
-  </section>
+<section class="card">
+  <h2>Kids-safety</h2>
+  <ul>
+    <li>No adult content, violence, hate, or harassment.</li>
+    <li>Positive themes: friendship, learning, humor, curiosity.</li>
+    <li>Content generation follows strict guidelines before publishing.</li>
+  </ul>
+</section>
 
-  <footer class="muted">
-    <p>
-      <a href="terms.html">Terms of Service</a> •
-      <a href="privacy.html">Privacy Policy</a>
-    </p>
-  </footer>
+<section class="card" id="support">
+  <h2>Support & contact</h2>
+  <p>Email: <a href="mailto:business.ai.gpt@gmail.com">business.ai.gpt@gmail.com</a></p>
+  <p class="muted">We respond to support requests within 2 business days.</p>
+</section>
+
+<footer class="muted">
+  <p>
+    <a href="terms.html">Terms of Service</a> •
+    <a href="privacy.html">Privacy Policy</a>
+  </p>
+</footer>
+
 </body>
 </html>
