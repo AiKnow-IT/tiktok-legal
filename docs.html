@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AIKnow-IT</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:0;line-height:1.6;background:#0b0f17;color:#eef2ff}
+    header,main,footer{max-width:980px;margin:0 auto;padding:22px 18px}
+    nav a{color:#8bd0ff;text-decoration:none;margin-right:14px}
+    .card{background:#111a2e;border:1px solid #243155;border-radius:16px;padding:18px;margin:14px 0}
+    .muted{color:#b7c2ff}
+    a{color:#8bd0ff}
+    code{background:#0f1630;padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+<header>
+  <h1 style="margin:0 0 10px;">AIKnow-IT</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="docs.html">Docs</a>
+    <a href="safety.html">Safety</a>
+    <a href="security.html">Security</a>
+    <a href="support.html">Support</a>
+  </nav>
+</header>
+
+<main>
+  <section class="card">
+  <h2>Documentation</h2>
+  <p class="muted">High-level overview of the TikTok integration.</p>
+</section>
+
+<section class="card">
+  <h2>TikTok end-to-end flow</h2>
+  <ol>
+    <li>OAuth (Login Kit): user grants access.</li>
+    <li>Fetch creator settings: <code>creator_info/query</code> (privacy options).</li>
+    <li>Init publish: <code>/v2/post/publish/video/init</code>.</li>
+    <li>Deliver video: FILE_UPLOAD (upload_url) or PULL_FROM_URL (public MP4 URL).</li>
+    <li>Check result: <code>status/fetch</code> until completed.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2>Scopes</h2>
+  <ul>
+    <li><code>video.publish</code> — required to publish videos.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Data handling</h2>
+  <ul>
+    <li>We store OAuth refresh tokens securely to refresh access tokens.</li>
+    <li>We store minimal metadata (caption/privacy) and limited logs for debugging.</li>
+  </ul>
+</section>
+</main>
+
+<footer class="muted">
+  <p>
+    <a href="terms.html">Terms of Service</a> •
+    <a href="privacy.html">Privacy Policy</a>
+  </p>
+</footer>
+</body>
+</html>
