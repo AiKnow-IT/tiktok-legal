@@ -1,62 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>AIKnow-IT</title>
-  <style>
-    body{font-family:system-ui,Arial;margin:0;line-height:1.6;background:#0b0f17;color:#eef2ff}
-    header,main,footer{max-width:980px;margin:0 auto;padding:22px 18px}
-    nav a{color:#8bd0ff;text-decoration:none;margin-right:14px}
-    .card{background:#111a2e;border:1px solid #243155;border-radius:16px;padding:18px;margin:14px 0}
-    .muted{color:#b7c2ff}
-    a{color:#8bd0ff}
-    code{background:#0f1630;padding:2px 6px;border-radius:6px}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — AIKnow-IT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1 style="margin:0 0 10px;">AIKnow-IT</h1>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="product.html">Product</a>
-    <a href="docs.html">Docs</a>
-    <a href="safety.html">Safety</a>
-    <a href="security.html">Security</a>
-    <a href="support.html">Support</a>
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><span class="logo-dot"></span> AIKnow-IT</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="product.html" class="active">Product</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="safety.html">Safety</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="product.html" class="nav-cta">Get Early Access</a></li>
+      </ul>
+    </div>
   </nav>
-</header>
 
-<main>
-  <section class="card">
-  <h2>Product</h2>
-  <p>AIKnow-IT helps teams manage short-form content creation and publishing.</p>
-</section>
+  <section class="page-hero">
+    <div class="section-inner centered">
+      <div class="section-label">Product</div>
+      <h1 class="section-title" style="font-size:clamp(2rem,4vw,3rem);">AI-generated kid-safe videos,<br>published to all your channels</h1>
+      <p class="section-subtitle" style="margin:1rem auto 0;">From script to TikTok, YouTube Shorts, and Instagram Reels — fully automated, fully safe.</p>
+    </div>
+  </section>
 
-<section class="card">
-  <h2>Key features</h2>
-  <ul>
-    <li>Automated short-video generation with kid-safe guidelines.</li>
-    <li>Caption/hashtag preparation per platform.</li>
-    <li>Publishing workflow for TikTok (and other platforms).</li>
-    <li>Status tracking and error notifications.</li>
-  </ul>
-</section>
+  <!-- PRODUCT FLOW -->
+  <section>
+    <div class="section-inner">
+      <div class="section-label">The platform</div>
+      <h2 class="section-title">How AIKnow-IT works for you</h2>
 
-<section class="card">
-  <h2>User control</h2>
-  <ul>
-    <li>Users connect their own TikTok account via OAuth.</li>
-    <li>Users can change privacy settings and revoke access anytime.</li>
-  </ul>
-</section>
-</main>
+      <div class="product-flow">
 
-<footer class="muted">
-  <p>
-    <a href="terms.html">Terms of Service</a> •
-    <a href="privacy.html">Privacy Policy</a>
-  </p>
-</footer>
+        <div class="flow-item">
+          <div class="flow-icon" style="background:#E8F8EF;">🎯</div>
+          <div class="flow-content">
+            <h3>1. Connect your social accounts</h3>
+            <p>Securely link your TikTok, YouTube, and Instagram accounts using official OAuth authorization. You always stay in control — revoke access anytime from your social media settings.</p>
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-icon" style="background:#FFF6D6;">✨</div>
+          <div class="flow-content">
+            <h3>2. Configure your content preferences</h3>
+            <p>Choose your target audience (ages 8–12), preferred themes (adventure, humor, learning), posting frequency, and scheduling preferences. Set it once, adjust anytime.</p>
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-icon" style="background:#E3F0FF;">🤖</div>
+          <div class="flow-content">
+            <h3>3. AI creates your video</h3>
+            <p>Our AI pipeline generates an original script with unique characters, then creates a vibrant cartoon animation in vertical 9:16 format — perfect for short-form platforms. Every video passes through content safety checks.</p>
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-icon" style="background:#FFE8E5;">📝</div>
+          <div class="flow-content">
+            <h3>4. Smart captions &amp; hashtags</h3>
+            <p>The AI generates engaging, platform-optimized captions and relevant hashtags to maximize discoverability — all kid-friendly and brand-safe.</p>
+          </div>
+        </div>
+
+        <div class="flow-item">
+          <div class="flow-icon" style="background:#F0E8FF;">🚀</div>
+          <div class="flow-content">
+            <h3>5. Publish across platforms</h3>
+            <p>Videos are automatically published to your connected TikTok, YouTube Shorts, and Instagram Reels accounts. Track publishing status in real-time from your dashboard.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TIKTOK INTEGRATION -->
+  <section style="background:var(--bg-warm);">
+    <div class="section-inner">
+      <div class="section-label">TikTok Integration</div>
+      <h2 class="section-title">Direct publishing via TikTok Content Posting API</h2>
+      <p class="section-subtitle">Our TikTok integration uses official APIs with the minimum required permissions.</p>
+
+      <div class="integration-grid" style="margin-top:2.5rem;">
+        <div class="integration-card">
+          <h3>🔐 Login via OAuth 2.0</h3>
+          <p>Users authorize AIKnow-IT through TikTok's official OAuth consent screen. We request only the <code>video.publish</code> scope — nothing more.</p>
+        </div>
+        <div class="integration-card">
+          <h3>📤 Content Posting API</h3>
+          <p>Videos are published using TikTok's Direct Post flow: we initialize the post with a public video URL, then track publishing status until complete.</p>
+        </div>
+        <div class="integration-card">
+          <h3>🔒 Token Management</h3>
+          <p>Access tokens are stored securely and encrypted at rest. Users can disconnect their TikTok account at any time, which immediately revokes our access.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EARLY ACCESS -->
+  <section class="cta-section">
+    <div class="section-inner centered">
+      <div class="section-label">Early Access</div>
+      <h2 class="section-title">Join the early access program</h2>
+      <p class="section-subtitle" style="margin:0 auto;">We're currently onboarding creators and educational publishers. Sign up to be among the first to use AIKnow-IT.</p>
+      <a href="mailto:business.ai.gpt@gmail.com?subject=AIKnow-IT%20Early%20Access%20Request" class="btn btn-primary" style="margin-top:2rem;">Request Access via Email →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="logo-dot"></span> AIKnow-IT</a>
+        <p>AI-powered kid-safe video creation and multi-platform publishing for creators and educational publishers.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="product.html">Features</a><a href="docs.html">Documentation</a><a href="safety.html">Safety</a><a href="security.html">Security</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="support.html">Support</a><a href="mailto:business.ai.gpt@gmail.com">Contact</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 AIKnow-IT. All rights reserved.</span>
+      <div class="footer-legal"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a></div>
+    </div>
+  </footer>
+
 </body>
 </html>
