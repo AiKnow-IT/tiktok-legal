@@ -1,79 +1,577 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>AIKnow-IT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIKnow-IT — Kid-Safe AI Video Creation Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
   <style>
-    body{font-family:system-ui,Arial;margin:0;line-height:1.6;background:#0b0f17;color:#eef2ff}
-    header,main,footer{max-width:980px;margin:0 auto;padding:22px 18px}
-    nav a{color:#8bd0ff;text-decoration:none;margin-right:14px}
-    .card{background:#111a2e;border:1px solid #243155;border-radius:16px;padding:18px;margin:14px 0}
-    .muted{color:#b7c2ff}
-    a{color:#8bd0ff}
-    code{background:#0f1630;padding:2px 6px;border-radius:6px}
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FAFBF7;
+      --bg-warm: #F2F0E8;
+      --text: #1A1D1A;
+      --text-muted: #5C6360;
+      --accent: #2DBB6E;
+      --accent-dark: #1E9A57;
+      --accent-glow: #2DBB6E22;
+      --coral: #FF6F61;
+      --blue: #4A90D9;
+      --violet: #8B6FC0;
+      --yellow: #FFD23F;
+      --card: #FFFFFF;
+      --border: #E2E5DE;
+      --radius: 16px;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-display: 'Bricolage Grotesque', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250, 251, 247, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: .6; }
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent-dark); font-weight: 700; }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 8px 20px; border-radius: 100px;
+      font-weight: 700 !important; font-size: 0.85rem !important;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      max-width: 1140px; margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      font-weight: 800; line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      margin-top: 1.2rem; font-size: 1.1rem;
+      color: var(--text-muted); max-width: 480px; line-height: 1.7;
+    }
+    .hero-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-family: var(--font-body); font-size: 0.95rem;
+      font-weight: 700; text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,187,110,.25); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .phone-frame {
+      width: 240px; height: 420px;
+      background: var(--text);
+      border-radius: 32px;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.05);
+      position: relative; z-index: 2;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #FFE4B5, #FF9A8B, #FF6F61, #D63384);
+      border-radius: 22px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff; text-align: center;
+      font-family: var(--font-display);
+      overflow: hidden; position: relative;
+    }
+    .phone-screen::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='4' fill='%23ffffff15'/%3E%3C/svg%3E");
+      opacity: .5;
+    }
+    .phone-screen .play-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,255,255,.25); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; z-index: 1;
+      border: 2px solid rgba(255,255,255,.4);
+    }
+    .phone-screen .vid-label {
+      margin-top: 16px; font-size: 0.8rem; font-weight: 600;
+      z-index: 1; opacity: .9;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .float-badge {
+      position: absolute; background: var(--card);
+      border-radius: 14px; padding: 12px 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+      font-size: 0.82rem; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      z-index: 3;
+      animation: float 4s ease-in-out infinite;
+    }
+    .float-badge.top-left { top: 20px; left: -40px; animation-delay: 0s; }
+    .float-badge.bottom-right { bottom: 40px; right: -50px; animation-delay: 1.5s; }
+    .float-badge .badge-icon {
+      width: 32px; height: 32px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .float-badge .badge-icon.green { background: #E8F8EF; }
+    .float-badge .badge-icon.blue { background: #E3F0FF; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* TRUST BAR */
+    .trust {
+      max-width: 1140px; margin: 0 auto;
+      padding: 2rem 2rem 3rem;
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .trust span {
+      font-size: 0.82rem; color: var(--text-muted);
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+    .trust-logos {
+      display: flex; gap: 2.5rem; align-items: center; opacity: .5;
+    }
+    .trust-logos span {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 1.1rem; color: var(--text);
+    }
+
+    /* SECTION */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1140px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent-dark); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 560px; line-height: 1.7;
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works { background: var(--bg-warm); }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .step-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .step-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.06); }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--accent); opacity: .3;
+      line-height: 1;
+    }
+    .step-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 600;
+      margin: 1rem 0 0.5rem;
+    }
+    .step-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .feature-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .feature-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.05); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 1.2rem;
+    }
+    .feature-icon.green { background: #E8F8EF; }
+    .feature-icon.coral { background: #FFE8E5; }
+    .feature-icon.blue { background: #E3F0FF; }
+    .feature-icon.violet { background: #F0E8FF; }
+    .feature-icon.yellow { background: #FFF6D6; }
+    .feature-icon.teal { background: #E0F5F0; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* SAFETY */
+    .safety { background: var(--bg-warm); }
+    .safety-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+    .safety-list { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; }
+    .safety-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.95rem; line-height: 1.6;
+    }
+    .safety-check {
+      width: 28px; height: 28px; min-width: 28px;
+      border-radius: 8px; background: #E8F8EF;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-weight: 700; font-size: 0.85rem;
+    }
+    .safety-visual {
+      background: linear-gradient(135deg, var(--accent), #4ECDC4);
+      border-radius: 24px; padding: 3rem;
+      color: #fff; text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 320px;
+    }
+    .safety-visual .shield { font-size: 4rem; margin-bottom: 1rem; }
+    .safety-visual h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 800;
+    }
+    .safety-visual p { font-size: 0.9rem; opacity: .85; margin-top: .5rem; max-width: 280px; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--text);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .cta-section .section-label { color: var(--accent); }
+    .cta-section .section-title { color: #fff; }
+    .cta-section .section-subtitle { color: rgba(255,255,255,.6); margin: 0 auto; }
+    .cta-section .btn-primary { margin-top: 2rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,.5);
+      padding: 3rem 2rem 2rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+    .footer-col h4 {
+      color: rgba(255,255,255,.8); font-size: 0.82rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 1rem; font-weight: 700;
+    }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,.5);
+      text-decoration: none; font-size: 0.88rem;
+      margin-bottom: 0.6rem; transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1140px; margin: 2rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-legal a { color: rgba(255,255,255,.5); text-decoration: none; margin-left: 1.5rem; }
+    .footer-legal a:hover { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 4rem; }
+      .hero p { margin: 1rem auto 0; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { margin-top: 2rem; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .safety-content { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-<header>
-  <h1 style="margin:0 0 10px;">AIKnow-IT</h1>
+
+  <!-- NAVIGATION -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="product.html">Product</a>
-    <a href="docs.html">Docs</a>
-    <a href="safety.html">Safety</a>
-    <a href="security.html">Security</a>
-    <a href="support.html">Support</a>
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><span class="logo-dot"></span> AIKnow-IT</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="product.html">Product</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="safety.html">Safety</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="product.html" class="nav-cta">Get Early Access</a></li>
+      </ul>
+    </div>
   </nav>
-</header>
 
-<main>
-  <section class="card">
-  <h2>What we do</h2>
-  <p class="muted">We generate and publish kid-safe short videos for creators and educational publishers.</p>
-</section>
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <h1>Create <span class="highlight">kid-safe</span> short videos with AI — and publish everywhere</h1>
+      <p>AIKnow-IT helps creators and educational publishers generate engaging, age-appropriate cartoon shorts and publish them directly to TikTok, YouTube Shorts, and Instagram Reels.</p>
+      <div class="hero-actions">
+        <a href="product.html" class="btn btn-primary">Get Early Access →</a>
+        <a href="docs.html" class="btn btn-outline">Read the Docs</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-badge top-left">
+        <div class="badge-icon green">✓</div>
+        <span>Kid-safe verified</span>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="play-icon">▶</div>
+          <div class="vid-label">AI-Generated Short</div>
+        </div>
+      </div>
+      <div class="float-badge bottom-right">
+        <div class="badge-icon blue">📱</div>
+        <span>Published to 3 platforms</span>
+      </div>
+    </div>
+  </div>
 
-<section class="card">
-  <h2>How it works</h2>
-  <ol>
-    <li>Generate a kid-safe script and storyboard.</li>
-    <li>Create a vertical short video (9:16, ~20–25 seconds).</li>
-    <li>Prepare captions and hashtags.</li>
-    <li>User connects TikTok via OAuth consent.</li>
-    <li>Publish via TikTok Content Posting API and track status.</li>
-  </ol>
-</section>
+  <!-- TRUST -->
+  <div class="trust">
+    <span>Powered by</span>
+    <div class="trust-logos">
+      <span>OpenAI Sora</span>
+      <span>GPT‑4</span>
+      <span>TikTok API</span>
+    </div>
+  </div>
 
-<section class="card">
-  <h2>TikTok integration</h2>
-  <ul>
-    <li><b>Login (OAuth):</b> user authorizes account connection.</li>
-    <li><b>Scope:</b> <code>video.publish</code> (only what we need for posting).</li>
-    <li><b>Posting:</b> Direct Post init → upload/URL → status fetch until complete.</li>
-  </ul>
-</section>
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="section-inner">
+      <div class="section-label">How it works</div>
+      <h2 class="section-title">From idea to published video in minutes</h2>
+      <p class="section-subtitle">Our platform handles the entire creative pipeline — so you can focus on growing your audience.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3>Choose a theme</h3>
+          <p>Pick from categories like friendship adventures, funny animals, space exploration, or let AI surprise you with a fresh idea.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3>AI generates your video</h3>
+          <p>Our AI writes an original script with kid-safe characters and turns it into a vibrant cartoon animation — no design skills needed.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3>Review &amp; approve</h3>
+          <p>Preview the generated video, captions, and hashtags. Make any adjustments before it goes live.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h3>Publish everywhere</h3>
+          <p>Connect your TikTok, YouTube, and Instagram accounts via secure OAuth. We publish directly to all platforms at once.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="card">
-  <h2>Kids-safety</h2>
-  <ul>
-    <li>No adult content, violence, hate, or harassment.</li>
-    <li>Positive themes: friendship, learning, humor, curiosity.</li>
-    <li>Content is generated with strict guidelines before publishing.</li>
-  </ul>
-</section>
+  <!-- FEATURES -->
+  <section>
+    <div class="section-inner">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything you need for kid-safe content</h2>
+      <p class="section-subtitle">Built specifically for creators who want to publish wholesome, engaging short-form video for young audiences.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon green">🎨</div>
+          <h3>AI-Powered Video Creation</h3>
+          <p>Generate original cartoon shorts using GPT-4 for scripting and Sora for animation. Every video is unique.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon coral">🛡️</div>
+          <h3>Kid-Safe by Design</h3>
+          <p>Strict content guardrails ensure every video is appropriate for ages 8–12. No violence, no adult content, ever.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon blue">📱</div>
+          <h3>Multi-Platform Publishing</h3>
+          <p>Publish to TikTok, YouTube Shorts, and Instagram Reels simultaneously with a single click.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon violet">🔗</div>
+          <h3>Secure OAuth Integration</h3>
+          <p>Users connect their own social accounts through official OAuth flows. We never store passwords.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon yellow">📝</div>
+          <h3>Smart Captions &amp; Hashtags</h3>
+          <p>AI generates optimized captions and trending hashtags for maximum reach on every platform.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon teal">📊</div>
+          <h3>Publishing Dashboard</h3>
+          <p>Track the status of your published videos across all platforms from a single dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="card">
-  <h2>Support</h2>
-  <p>Email: <a href="mailto:business.ai.gpt@gmail.com">business.ai.gpt@gmail.com</a></p>
-  <p class="muted">We respond within 2 business days.</p>
-</section>
-</main>
+  <!-- SAFETY -->
+  <section class="safety">
+    <div class="section-inner">
+      <div class="section-label">Safety first</div>
+      <h2 class="section-title">Built for kids. Trusted by parents.</h2>
+      <p class="section-subtitle">Every piece of content goes through multiple safety layers before it ever reaches an audience.</p>
+      <div class="safety-content">
+        <ul class="safety-list">
+          <li><div class="safety-check">✓</div><div><strong>Original characters only</strong> — no copyrighted characters like Disney, Pokémon, or other IP</div></li>
+          <li><div class="safety-check">✓</div><div><strong>Positive themes</strong> — friendship, adventure, curiosity, humor, and learning</div></li>
+          <li><div class="safety-check">✓</div><div><strong>No real people</strong> — we never depict real individuals or public figures</div></li>
+          <li><div class="safety-check">✓</div><div><strong>Content moderation</strong> — every script is validated against safety rules before video generation</div></li>
+          <li><div class="safety-check">✓</div><div><strong>Age-appropriate</strong> — specifically designed for audiences aged 8–12</div></li>
+          <li><div class="safety-check">✓</div><div><strong>No copyrighted music</strong> — all audio elements are original or royalty-free</div></li>
+        </ul>
+        <div class="safety-visual">
+          <div class="shield">🛡️</div>
+          <h3>Content Safety Score: A+</h3>
+          <p>Every video is verified against our multi-layer safety framework before publishing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer class="muted">
-  <p>
-    <a href="terms.html">Terms of Service</a> •
-    <a href="privacy.html">Privacy Policy</a>
-  </p>
-</footer>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="section-label">Get started</div>
+      <h2 class="section-title">Ready to create kid-safe content at scale?</h2>
+      <p class="section-subtitle">Join our early access program and start generating and publishing kid-safe cartoon shorts today.</p>
+      <a href="product.html" class="btn btn-primary">Request Early Access →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="logo-dot"></span> AIKnow-IT</a>
+        <p>AI-powered kid-safe video creation and multi-platform publishing for creators and educational publishers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="product.html">Features</a>
+        <a href="docs.html">Documentation</a>
+        <a href="safety.html">Safety</a>
+        <a href="security.html">Security</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="support.html">Support</a>
+        <a href="mailto:business.ai.gpt@gmail.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 AIKnow-IT. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
